@@ -50,7 +50,7 @@ import numpy
 cimport numpy
 
 from sage.rings.arith import binomial, falling_factorial
-from sage.combinat.all import Combinations, Permutations, Tuples, Subsets
+from sage.combinat.all import Combinations, Permutations, Permutation, Tuples, Subsets
 from sage.rings.all import Integer, QQ, ZZ
 from sage.matrix.all import matrix, block_matrix
 from sage.modules.misc import gram_schmidt
@@ -599,7 +599,7 @@ cdef class HypergraphFlag (Flag):
 		for fg in flags:
 			mfgs = str(fg)
 			for perm in Permutations(range(1, s + 1)):
-				permplus = perm + range(s + 1, fg.n + 1)
+				permplus = Permutation(list(perm) + range(s + 1, fg.n + 1))
 				ntg = tg.__copy__()
 				ntg.relabel(perm)
 				nfg = fg.__copy__()
